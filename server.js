@@ -4,7 +4,10 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan');
-    
+
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -105,3 +108,11 @@ app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
+
+// socket.io
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
