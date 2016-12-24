@@ -7,7 +7,9 @@ var express = require('express'),
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
+io.set('transports', [
+                'websocket'
+            ]);
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);

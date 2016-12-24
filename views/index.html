@@ -308,7 +308,7 @@ $ git push</pre>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script>
-  var socket = io.connect('http://nodejs-mongo-persistent-connected-qms.44fs.preview.openshiftapps.com/');
+  var socket = io.connect('ws://nodejs-mongo-persistent-connected-qms.44fs.preview.openshiftapps.com:8000/');
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
