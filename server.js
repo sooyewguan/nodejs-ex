@@ -8,9 +8,6 @@ var express = require('express'),
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-io.set('transports', [
-                'websocket'
-            ]);
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -64,12 +61,38 @@ var initDb = function(callback) {
   });
 };
 
-server.listen(port);
-
 app.get('/', function (req, res) {
-  res.render('index.html');
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    var col = db.collection('counts');
+    // Create a document with request IP and current time of request
+    col.insert({ip: req.ip, date: Date.now()});
+    col.count(function(err, count){
+      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+    });
+  } else {
+    res.render('index.html', { pageCountMessage : null});
+  }
 });
 
+app.get('/pagecount', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('counts').count(function(err, count ){
+      res.send('{ pageCount: ' + count + '}');
+    });
+  } else {
+    res.send('{ pageCount: -1 }');
+  }
+});
 
 // error handling
 app.use(function(err, req, res, next){
@@ -81,12 +104,12 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-//app.listen(port, ip);
-//console.log('Server running on http://%s:%s', ip, port);
+app.listen(port, ip);
+console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
 
-// socket.io
+// socket
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
