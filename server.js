@@ -6,7 +6,7 @@ var express = require('express'),
     morgan  = require('morgan');
 
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io')(server);
 
 io.set('transports', [
                 'websocket'
