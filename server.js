@@ -53,6 +53,7 @@ app.get('/', function (req, res) {
 
 // And finally some websocket stuff
 io.on('connection', function (socket) { // Incoming connections from clients
+  console.log('connection');
   // Greet the newcomer
   socket.emit('hello', { greeting: 'Hi socket ' + socket.id + ' this is Server speaking! Let\'s play ping-pong. You pass!' });
 
