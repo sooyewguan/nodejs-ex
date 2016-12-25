@@ -39,7 +39,9 @@ app.use(function(err, req, res, next){
 // Serve GET on http://domain/
 app.get('/', function (req, res) {
   console.log('request');
-  res.sendFile(__dirname + '/index.html');
+  res.status(200).send('Something bad happened!');
+
+  //res.sendFile(__dirname + '/index.html');
 });
 
 // Server GET on http://domain/api/config
