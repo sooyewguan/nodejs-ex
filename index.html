@@ -6,7 +6,7 @@
   //var socket = io.connect('ws://localhost:8080/');
   var a = 0; 
 
-  var socket = io.connect('ws://cqms-cqms.44fs.preview.openshiftapps.com:8000/', {transports: ['websocket'], upgrade: false});
+  var socket = io.connect('ws://cqms-cqms.44fs.preview.openshiftapps.com/', {transports: ['websocket'], upgrade: false});
   
   socket.on('pings', function (data) {
     var interval = performance.now() - a;
@@ -26,6 +26,7 @@
       
       reply();
     }
+    console.log(data);
   });
 
 
@@ -39,7 +40,10 @@
 </script>
 </head>
 <body>
+  <h2>Connection</h2>
   <p  id="connection"></p>
+
+  <h2>Ping every 5 seconds </h2>
   <ol id="performance"></ol>
 </body>
 </html>
