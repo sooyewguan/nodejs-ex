@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
 //});
 
 // And finally some websocket stuff
-/*io.on('connection', function (socket) { // Incoming connections from clients
+io.on('connection', function (socket) { // Incoming connections from clients
   // Greet the newcomer
   socket.emit('hello', { greeting: 'Hi socket ' + socket.id + ' this is Server speaking! Let\'s play ping-pong. You pass!' });
 
@@ -60,4 +60,4 @@ app.get('/', function (req, res) {
     console.log("received ping from client: ", data);
     socket.emit('pong', { id: data.id });
   });
-});*/
+});
