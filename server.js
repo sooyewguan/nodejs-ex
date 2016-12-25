@@ -1,10 +1,10 @@
 var express = require('express');
 var app = require('express')();
-//var server = require('http').Server(app);
+var server = require('http').Server(app);
 var path = require('path');
 
 // Websockets with socket.io
-//var io = require('socket.io')(server);
+var io = require('socket.io')(server);
 
 var cors = require('cors');
 
@@ -29,7 +29,7 @@ console.log("Trying to start server with config:", serverip + ":" + serverport);
 app.listen(serverport, serverip);
 
 // Allow some files to be server over HTTP
-app.use(express.static(__dirname + '/'));
+//app.use(express.static(__dirname + '/'));
 
 // error handling
 app.use(function(err, req, res, next){
