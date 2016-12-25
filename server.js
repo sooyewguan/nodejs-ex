@@ -6,7 +6,7 @@ var path = require('path');
 // Websockets with socket.io
 var io = require('socket.io')(server);
 
-//io.set("transports", ["websocket"]);
+io.set("transports", ["websocket"]);
 
 var cors = require('cors');
 
@@ -17,7 +17,7 @@ var cors = require('cors');
 app.use(cors());
 
 
-var serverip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var serverip = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var serverport = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 console.log("Trying to start server with config:", serverip + ":" + serverport);
