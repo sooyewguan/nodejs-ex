@@ -1,9 +1,10 @@
 var express = require('express');
 var app = require('express')();
-var server = require('http').Server(app);
+//var server = require('http').Server(app);
+var path = require('path');
 
 // Websockets with socket.io
-var io = require('socket.io')(server);
+//var io = require('socket.io')(server);
 
 var cors = require('cors');
 
@@ -14,7 +15,7 @@ var cors = require('cors');
 app.use(cors());
 
 
-var serverip = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var serverip = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var serverport = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 console.log("Trying to start server with config:", serverip + ":" + serverport);
@@ -39,8 +40,8 @@ app.use(function(err, req, res, next){
 // Serve GET on http://domain/
 app.get('/', function (req, res) {
   console.log('request');
-  res.status(200).send('Something bad happened!');
-
+  //res.status(200).send('Something bad happened!');
+  res.sendFile(path.join(__dirname + '/index.html'));
   //res.sendFile(__dirname + '/index.html');
 });
 
@@ -51,7 +52,7 @@ app.get('/', function (req, res) {
 //});
 
 // And finally some websocket stuff
-io.on('connection', function (socket) { // Incoming connections from clients
+/*io.on('connection', function (socket) { // Incoming connections from clients
   // Greet the newcomer
   socket.emit('hello', { greeting: 'Hi socket ' + socket.id + ' this is Server speaking! Let\'s play ping-pong. You pass!' });
 
@@ -59,4 +60,4 @@ io.on('connection', function (socket) { // Incoming connections from clients
     console.log("received ping from client: ", data);
     socket.emit('pong', { id: data.id });
   });
-});
+});*/
