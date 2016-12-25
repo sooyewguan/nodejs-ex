@@ -21,9 +21,11 @@ console.log("Trying to start server with config:", serverip + ":" + serverport);
 
 // Both port and ip are needed for the OpenShift, otherwise it tries 
 // to bind server on IP 0.0.0.0 (or something) and fails
-server.listen(serverport, serverip, function() {
-  console.log("Server running @ http://" + serverip + ":" + serverport);
-});
+//server.listen(serverport, serverip, function() {
+//  console.log("Server running @ http://" + serverip + ":" + serverport);
+//});
+
+app.listen(serverport, serverip);
 
 // Allow some files to be server over HTTP
 app.use(express.static(__dirname + '/'));
