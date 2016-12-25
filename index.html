@@ -6,7 +6,7 @@
   //var socket = io.connect('ws://localhost:8080/');
   var a = 0; 
 
-  var socket = io.connect('ws://localhost:8080/', {transports: ['websocket'], upgrade: false});
+  var socket = io.connect('ws://cqms-cqms.44fs.preview.openshiftapps.com:8000/', {transports: ['websocket'], upgrade: false});
   
   socket.on('pings', function (data) {
     var interval = performance.now() - a;
