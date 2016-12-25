@@ -17,8 +17,8 @@ var cors = require('cors');
 app.use(cors());
 
 
-var serverip = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-var serverport = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var serverip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var serverport = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 console.log("Trying to start server with config:", serverip + ":" + serverport);
 
@@ -56,6 +56,7 @@ app.get('/', function (req, res) {
 // And finally some websocket stuff
 io.on('connection', function (socket) { // Incoming connections from clients
   console.log('connection');
+  console.log(socket.conn.transport.name);
   // Greet the newcomer
   socket.emit('hello', { greeting: 'Hi socket ' + socket.id + ' this is Server speaking! Let\'s play ping-pong. You pass!' });
 
