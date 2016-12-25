@@ -14,7 +14,7 @@ var cors = require('cors');
 app.use(cors());
 
 
-var serverip = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+var serverip = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var serverport = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 console.log("Trying to start server with config:", serverip + ":" + serverport);
@@ -36,6 +36,7 @@ app.use(function(err, req, res, next){
 
 // Serve GET on http://domain/
 app.get('/', function (req, res) {
+  console.log('request');
   res.sendFile(__dirname + '/index.html');
 });
 
