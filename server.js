@@ -29,6 +29,12 @@ server.listen(serverport, serverip, function() {
 // Allow some files to be server over HTTP
 app.use(express.static(__dirname + '/'));
 
+// error handling
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.status(500).send('Something bad happened!');
+});
+
 // Serve GET on http://domain/
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
