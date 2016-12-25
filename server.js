@@ -13,13 +13,12 @@ var cors = require('cors');
 //app.use(bodyParser.json({ type: 'application/json' })); // parse application/vnd.api+json as json
 app.use(cors());
 
-var domain =     process.env.OPENSHIFT_APP_DNS || '127.0.0.1';
 
-var serverip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var serverport = process.env.OPENSHIFT_NODEJS_PORT || '8080';
+var serverip = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+var serverport = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 console.log("Trying to start server with config:", serverip + ":" + serverport);
-console.log(domain);
+
 // Both port and ip are needed for the OpenShift, otherwise it tries 
 // to bind server on IP 0.0.0.0 (or something) and fails
 server.listen(serverport, serverip, function() {
