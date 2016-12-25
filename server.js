@@ -6,7 +6,7 @@ var path = require('path');
 // Websockets with socket.io
 var io = require('socket.io')(server);
 
-//io.set("transports", ["websocket"]);
+io.set("transports", ["websocket"]);
 
 var cors = require('cors');
 
@@ -54,14 +54,13 @@ app.get('/', function (req, res) {
 //});
 
 // And finally some websocket stuff
-io.on('connection', function (socket) { // Incoming connections from clients
+io.on('connection', function (socket) {
   console.log('connection');
-  console.log(socket.conn.transport.name);
-  // Greet the newcomer
-  socket.emit('hello', { greeting: 'Hi socket ' + socket.id + ' this is Server speaking! Let\'s play ping-pong. You pass!' });
+    socket.emit('pings', {'protocol':socket.conn.transport.name});
 
-  socket.on('ping', function (data) { // ping-event from the client to be respond with pong
-    console.log("received ping from client: ", data);
-    socket.emit('pong', { id: data.id });
-  });
+    socket.on('pongs', function (data) {
+      console.log('pongs');
+      socket.emit('pings',  {'protocol':socket.conn.transport.name});
+      
+    });
 });
