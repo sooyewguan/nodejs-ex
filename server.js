@@ -6,6 +6,8 @@ var path = require('path');
 // Websockets with socket.io
 var io = require('socket.io')(server);
 
+io.set("transports", ["websocket"]);
+
 var cors = require('cors');
 
 
