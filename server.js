@@ -5,6 +5,14 @@ var server = require('http').Server(app);
 // Websockets with socket.io
 var io = require('socket.io')(server);
 
+var cors = require('cors');
+
+
+//app.use(bodyParser.json()); // support json encoded bodies
+//app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+//app.use(bodyParser.json({ type: 'application/json' })); // parse application/vnd.api+json as json
+app.use(cors());
+
 var domain =     process.env.OPENSHIFT_APP_DNS || '127.0.0.1';
 
 var serverip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
