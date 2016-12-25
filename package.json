@@ -12,7 +12,8 @@
     "mongodb": "^2.1.16",
     "morgan": "^1.7.0",
     "object-assign":"4.1.0",
-    "socket.io": "^1.4.8"
+    "socket.io": "^1.4.8",
+    "cors":"*"
   },
   "engine": {
     "node": "*",

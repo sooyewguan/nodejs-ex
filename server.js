@@ -7,8 +7,9 @@ var io = require('socket.io')(server);
 
 var domain =     process.env.OPENSHIFT_APP_DNS || '127.0.0.1';
 
- var serverip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var serverip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var serverport = process.env.OPENSHIFT_NODEJS_PORT || '8080';
+
 console.log("Trying to start server with config:", serverip + ":" + serverport);
 console.log(domain);
 // Both port and ip are needed for the OpenShift, otherwise it tries 
